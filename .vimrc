@@ -13,7 +13,14 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
 Plug 'chr4/nginx.vim'
-Plug 'dense-analysis/ale'
+Plug 'prettier/vim-prettier'
+Plug 'kshenoy/vim-signature'
+Plug 'rizzatti/dash.vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+"Plug 'dense-analysis/ale'
+"Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 set nocompatible
@@ -23,6 +30,9 @@ set shell=fish
 set rtp+=/usr/local/opt/fzf
 
 syntax off
+" colorscheme gruvbox
+" set background=dark
+" let g:airline_theme='gruvbox'
 
 set ttimeoutlen=1
 
@@ -70,6 +80,13 @@ nnoremap <C-C> :bd<CR>
 
 nnoremap <C-I> :edit %:h<CR>
 
+" quickfix
+nnoremap <C-L> :cn<CR>
+nnoremap <C-J> :cp<CR>
+
+" clear all marks
+nnoremap <silent> mm :delm a-zA-Z0-9<CR>
+
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
@@ -99,18 +116,28 @@ let g:multi_cursor_prev_key='<C-X>'
 let g:multi_cursor_skip_key='<C-K>'
 let g:multi_cursor_quit_key='<Esc>'
 
-let b:ale_fixers = ['prettier', 'eslint']
-let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 1
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-
 cnoreabbrev F Files
 nnoremap <C-P> :Files<CR>
 nnoremap <C-U> :Buffers<CR>
-nnoremap <C-H> :History:<CR>
+nnoremap <C-K> :History:<CR>
 nnoremap <C-S> :History/<CR>
+nnoremap <C-M> :Marks<CR>
 command! -bang -nargs=+ -complete=file A call fzf#vim#ag_raw(<q-args>)
 
 noremap <plug>(slash-after) zz
+
+let g:prettier#exec_cmd_async = 1
+let g:prettier#config#semi = 'false'
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#jsx_bracket_same_line = 'true'
+let g:prettier#config#arrow_parens = 'always'
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+:nmap <silent> <C-H> <Plug>DashSearch
+
+" let b:ale_fixers = ['prettier', 'eslint']
+" let g:ale_fix_on_save = 1
+" let g:ale_linters_explicit = 1
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
 

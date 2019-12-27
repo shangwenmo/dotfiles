@@ -1,28 +1,24 @@
 set EDITOR vim
 alias pbc "/usr/bin/pbcopy"
 alias pbp "/usr/bin/pbpaste"
-
 alias flutter="/Users/shangwenmo/Code/resource/flutter/bin/flutter"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias py "/usr/local/bin/python3"
 alias d "/usr/local/bin/docker"
 alias sqlt "/usr/local/opt/sqlite/bin/sqlite3"
-
-# alias pj "cd (fd -d 1 '.' /Users/shangwenmo/Code | fzf)"
-
+alias cleanvim "rm ~/.vim/swapfiles/*"
 alias demos "cd (fd -d 1 '.' /Users/shangwenmo/Code/demo | fzf)"
 alias demo "cd /Users/shangwenmo/Code/demo"
-alias note "cd /Users/shangwenmo/Nutstore/Notes/program"
-alias pd "cd (fd -d 1 '.' /Users/shangwenmo/paodingAI | fzf)"
+alias pd "cd (fd -d 1 '.' /Users/shangwenmo/paodingAI/projects | fzf)"
 
-alias sp "cd (fd -d 1 '.' /Users/shangwenmo/Cloud/Sprints | fzf)"
-
-alias cleanvim "rm ~/.vim/swapfiles/*"
+# alias pj "cd (fd -d 1 '.' /Users/shangwenmo/Code | fzf)"
+# alias ls "cd (fd -d 1 '.' | fzf)"
+# alias note "cd /Users/shangwenmo/Nutstore/Notes/program"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export https_proxy=http://127.0.0.1:7890
-export http_proxy=http://127.0.0.1:7890
-export all_proxy=socks5://127.0.0.1:7891
+# export https_proxy=http://127.0.0.1:7890
+# export http_proxy=http://127.0.0.1:7890
+# export all_proxy=socks5://127.0.0.1:7891
 export no_proxy="localhost,127.0.0.1"
 
 function nvm
