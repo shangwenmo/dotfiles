@@ -1,26 +1,31 @@
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-slash'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'christoomey/vim-system-copy'
-Plug 'junegunn/vim-slash'
 Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
+Plug 'mattn/emmet-vim'
 Plug 'chr4/nginx.vim'
 Plug 'prettier/vim-prettier'
 Plug 'kshenoy/vim-signature'
-Plug 'rizzatti/dash.vim'
+" Plug 'dense-analysis/ale'
+" Plug 'rizzatti/dash.vim'
 " Plug 'morhetz/gruvbox'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
-"Plug 'dense-analysis/ale'
-"Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 set nocompatible
@@ -81,8 +86,8 @@ nnoremap <C-C> :bd<CR>
 nnoremap <C-I> :edit %:h<CR>
 
 " quickfix
-nnoremap <C-L> :cn<CR>
-nnoremap <C-J> :cp<CR>
+" nnoremap <C-L> :cn<CR>
+" nnoremap <C-J> :cp<CR>
 
 " clear all marks
 nnoremap <silent> mm :delm a-zA-Z0-9<CR>
@@ -127,17 +132,30 @@ command! -bang -nargs=+ -complete=file A call fzf#vim#ag_raw(<q-args>)
 noremap <plug>(slash-after) zz
 
 let g:prettier#exec_cmd_async = 1
-let g:prettier#config#semi = 'false'
+let g:prettier#config#semi = 'true'
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#jsx_bracket_same_line = 'true'
 let g:prettier#config#arrow_parens = 'always'
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+let g:prettier#config#trailing_comma = 'always'
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-:nmap <silent> <C-H> <Plug>DashSearch
-
-" let b:ale_fixers = ['prettier', 'eslint']
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['tsserver', 'tslint'],
+\   'vue': ['eslint']
+\}
+let g:ale_fixers = {
+\    'javascript': ['prettier','eslint'],
+\    'typescript': ['prettier','tslint'],
+\    'vue': ['eslint'],
+\    'scss': ['prettier'],
+\    'html': ['prettier']
+\}
 " let g:ale_fix_on_save = 1
 " let g:ale_linters_explicit = 1
+let g:airline#extensions#ale#enabled = 1
+nmap <silent> <C-J> <Plug>(ale_previous_wrap)
+nmap <silent> <C-L> <Plug>(ale_next_wrap)
 " highlight clear ALEErrorSign
 " highlight clear ALEWarningSign
 
